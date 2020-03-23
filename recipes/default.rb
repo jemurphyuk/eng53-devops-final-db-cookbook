@@ -35,3 +35,4 @@ template '/lib/systemd/system/mongod.service' do
   source 'mongod.service.erb'
   notifies :restart, 'service[mongod]'
 end
+
