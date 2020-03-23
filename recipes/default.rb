@@ -36,14 +36,6 @@ template '/lib/systemd/system/mongod.service' do
   notifies :restart, 'service[mongod]'
 end
 
-execute 'download_metricbeat' do
-  command 'curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.deb'
-end
-
-execute 'install_metricbeat' do
-  command 'sudo dpkg -i metricbeat-7.6.1-amd64.deb'
-end
-
 template 'etc/metricbeat/metricbeat.yml' do
   source 'metricbeat.yml.erb'
   mode '777'
@@ -66,14 +58,6 @@ end
 #execute 'setup_dasboards' do
 #  command 'sudo metricbeat setup'
 #end
-
-execute 'download_filebeat' do
-  command 'curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb'
-end
-
-execute 'install_filebeat' do
-  command 'sudo dpkg -i filebeat-7.6.1-amd64.deb'
-end
 
 template 'etc/filebeat/filebeat.yml' do
   source 'filebeat.yml.erb'
